@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "82EB283F-ACF2-4A54-8D56-D278E53BA20A"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AF7A2A6F-1AF6-4572-ACD2-105F5707F192"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C9AA005-3C13-47C3-9D51-BD24D00B44BE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "69FDE507-690F-4115-A17D-485F513DF81C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56F4D40C-555A-49A7-894F-032166DBBC24"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "56F4D40C-555A-49A7-894F-032166DBBC24 - c3d9977f410dc96d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28">
+               </Location>
+               <Location
+                  uuid = "56F4D40C-555A-49A7-894F-032166DBBC24 - 59a884d9332125ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28">
+               </Location>
+               <Location
+                  uuid = "56F4D40C-555A-49A7-894F-032166DBBC24 - 9d386fde426b563"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28">
+               </Location>
+               <Location
+                  uuid = "56F4D40C-555A-49A7-894F-032166DBBC24 - 2ae88ebd564bd760"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E173F5F5-EC38-4A4D-A319-10222E9956CD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E173F5F5-EC38-4A4D-A319-10222E9956CD - 9d386fde426b502"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "E173F5F5-EC38-4A4D-A319-10222E9956CD - 9d386fde426b502"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0511ECF7-37F9-4167-8FDB-D4BC227F6EBC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4FED81F8-2EF3-4318-98AB-E6D6F696E8C8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58E8D960-6C6A-45EC-B66D-995A56FDA866"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0EA8CD84-7CF8-42B2-BF6A-047EF8CAC7C8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0EA8CD84-7CF8-42B2-BF6A-047EF8CAC7C8 - 9d386fde426b229"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38">
+               </Location>
+               <Location
+                  uuid = "0EA8CD84-7CF8-42B2-BF6A-047EF8CAC7C8 - 2ae88ebd564bd02a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38B011A2-75F1-4A5A-8B94-B76B50CA1FE3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "fetchWeatherCity(city:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "38B011A2-75F1-4A5A-8B94-B76B50CA1FE3 - 9d386fde426b26b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36">
+               </Location>
+               <Location
+                  uuid = "38B011A2-75F1-4A5A-8B94-B76B50CA1FE3 - 2ae88ebd564bd068"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for WeatherApp.NetworkWeatherCity.fetchWeatherCity(city: Swift.String) async -&gt; Swift.Array&lt;WeatherApp.WeatherData&gt;"
+                  moduleName = "WeatherApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinheredia/Desktop/Practicas/WeatherApp/WeatherApp/Shared/Data/Network/NetworkWeatherCity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
