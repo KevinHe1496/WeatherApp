@@ -37,6 +37,15 @@ final class NetworkWeatherCity: NetworkWeatherCityProtocol {
         }
         return modelReturn
     }
-    
-    
+}
+
+/// Mock
+final class NetworkWeatherCityMock: NetworkWeatherCityProtocol {
+    func fetchWeatherCity(city: String) async -> [WeatherData] {
+        
+        let model1 = WeatherData(id: 1, main: "Rain", description: "light rain", icon: "10d")
+        let model2 = WeatherData(id: 1, main: "Cloudy", description: "light rain", icon: "300d")
+        
+        return [model1, model2]
+    }
 }

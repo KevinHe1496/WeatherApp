@@ -13,6 +13,7 @@ struct ContentView: View {
     
     init() {
     }
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
