@@ -12,7 +12,8 @@ struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
     let columns = Array(repeating: GridItem(.flexible(minimum: 20)), count: 1)
-    
+    let network = NetworkWeatherCity()
+
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
     }
@@ -32,6 +33,7 @@ struct WeatherView: View {
                     .onSubmit {
                         Task {
                             await viewModel.getWeather()
+                           
                         }
                     }
 

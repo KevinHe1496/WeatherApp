@@ -25,7 +25,7 @@ final class AppState{
         self.status = .loading
         
         Task {
-            await weatherUseCase.fetchWeatherCity(city: citySearched)
+//            await weatherUseCase.fetchWeatherCity(city: citySearched)
             self.status = .loaded
             
         }
