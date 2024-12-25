@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct WeatherView: View {
     
@@ -23,6 +24,8 @@ struct WeatherView: View {
                 .resizable()
                 .background(Color(red: 192/255, green: 196/255, blue: 201/255))
             VStack {
+                
+                // TextField
                 TextField("Search City", text: $viewModel.citySeached)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 350)
@@ -31,49 +34,70 @@ struct WeatherView: View {
                             await viewModel.getWeather()
                         }
                     }
-                    .padding(.bottom, 50)
+
+                Spacer()
+                
+                // Country Name
                 Text("\(viewModel.country)")
-                    .font(.title)
+                    .font(.system(size: 80))
                     .bold()
                     
-                
+                // City Name
                 Text("\(viewModel.cityName)")
-                    
                 
+                // Image
                 ForEach(viewModel.weather) { weather in
-                    AsyncImage(url: URL(string: "https://openweathermap.org/img/wns/\(weather.icon)@2x.png")) { photo in
-                        photo
-                            .resizable()
-                            .frame(width: 100, height: 100)
-                    } placeholder: {
-                        ProgressView()
-                            .tint(.white)
-                            .frame(width: 100, height: 100)
-                            
-                    }
+
+                    Image(systemName: viewModel.getIcon)
+                        .font(.system(size: 150))
+                        .foregroundStyle(.white)
                 }
-                
-                
+                .padding()
+
+                // Temperature
                 Text(String(format: "%.0f °", viewModel.temperature))
                     .font(.system(size: 80))
-                    .padding()
-                
-                
-                LazyHGrid(rows: columns) {
+
+                // Forecast
                     ForEach(viewModel.weather) { weather in
                         Text("\(weather.main)")
                     }
-                }
+
+                // Temperatures
                 
+                HStack {
+                    VStack{
+                        Text("Max")
+                        Text(String(format: "%.0f °", viewModel.max_temperature))
+                    }
+                    .padding()
+                    .border(FillShapeStyle())
+                
+                    VStack{
+                        Text("Min")
+                        Text(String(format: "%.0f °", viewModel.min_Temperature))
+                    }
+                    .padding()
+                    .border(FillShapeStyle())
+                    VStack{
+                        Text("Humedad")
+                        Text("\(viewModel.humidity)")
+                            
+                    }
+                    .padding()
+                    .border(FillShapeStyle())
+                }
+
                 Spacer()
             }
             
             .searchable(text: $viewModel.cityName)
             
         }
+        
     }
 }
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(citySeached: "New york"))
+    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
 }

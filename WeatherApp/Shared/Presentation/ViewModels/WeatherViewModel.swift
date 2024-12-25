@@ -18,6 +18,10 @@ final class WeatherViewModel {
     var country: String = ""
     var icon: String = ""
     let conditionID = 0
+    var max_temperature: Double = 0.0
+    var min_Temperature: Double = 0.0
+    var humidity: Int = 0
+    var id: Int = 0
     
     @ObservationIgnored
     private var useCase: WeatherUseCaseProtocol
@@ -28,7 +32,28 @@ final class WeatherViewModel {
         Task {
             await getWeather()
         }
+        
     }
+    
+    var getIcon: String {
+        switch id {
+        case 200...232:
+            return "cloud.bolt.rain.fill"
+        case 300...321:
+            return "cloud.drizzle.fill"
+        case 500...531:
+            return "cloud.rain.fill"
+        case 600...622:
+            return "cloud.snow.fill"
+        case 701...781:
+            return "cloud.fog"
+        case 801...804:
+            return "cloud.fill"
+        default:
+            return "sun.max.fill"
+        }
+    }
+    
     
     
     @MainActor
@@ -38,9 +63,11 @@ final class WeatherViewModel {
         weather = data.weather
         temperature = data.main.temp
         country = data.sys.country
+        max_temperature = data.main.temp_max
+        min_Temperature = data.main.temp_min
+        humidity = data.main.humidity
+        id = weather[0].id
+        
         
     }
-    
-
-    
 }
