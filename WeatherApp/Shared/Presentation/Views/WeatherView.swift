@@ -41,12 +41,15 @@ struct WeatherView: View {
                     
                 
                 ForEach(viewModel.weather) { weather in
-                    AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(weather.icon)@2x.png")) { photo in
+                    AsyncImage(url: URL(string: "https://openweathermap.org/img/wns/\(weather.icon)@2x.png")) { photo in
                         photo
                             .resizable()
                             .frame(width: 100, height: 100)
                     } placeholder: {
                         ProgressView()
+                            .tint(.white)
+                            .frame(width: 100, height: 100)
+                            
                     }
                 }
                 
