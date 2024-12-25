@@ -16,15 +16,12 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .onAppear{
-            Task {
-                await network.fetchWeatherCity(city: "quito")
+            Button {
+                WeatherView(viewModel: WeatherViewModel())
+            } label: {
+                Text("Go to Weather Forecaste")
             }
+
         }
         .padding()
     }

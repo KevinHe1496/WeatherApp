@@ -16,7 +16,7 @@ final class DefaultWeatherReporitory: WeatherRepositoryProtocol {
         self.network = network
     }
     
-    func fetchWeatherCity(city: String) async -> [WeatherData] {
+    func fetchWeatherCity(city: String) async -> WeatherCityModel {
         return await network.fetchWeatherCity(city: city)
     }
 }
@@ -30,7 +30,7 @@ final class DefaultWeatherReporitoryMock: WeatherRepositoryProtocol {
         self.network = network
     }
     
-    func fetchWeatherCity(city: String) async -> [WeatherData] {
+    func fetchWeatherCity(city: String) async -> WeatherCityModel {
         return await network.fetchWeatherCity(city: city)
     }
     

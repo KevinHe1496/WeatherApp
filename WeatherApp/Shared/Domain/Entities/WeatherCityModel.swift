@@ -7,13 +7,25 @@
 
 import Foundation
 
-struct WeatherCityModel: Codable {
+struct WeatherCityModel: Codable, Equatable {
     let weather: [WeatherData]
+    let name: String
+    let main: MainData
+    let sys: Sys
 }
 
-struct WeatherData: Codable, Identifiable {
+struct WeatherData: Codable, Identifiable, Equatable {
     let id: Int
     let main: String
     let description: String
     let icon: String
+}
+
+struct MainData: Codable, Equatable {
+    let temp, feels_like, temp_min, temp_max: Double
+    let humidity: Int
+}
+
+struct Sys: Codable, Equatable {
+    let country: String
 }

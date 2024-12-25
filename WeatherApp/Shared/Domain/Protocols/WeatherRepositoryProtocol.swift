@@ -9,5 +9,5 @@ import Foundation
 
 /// Repository Protocol
 protocol WeatherRepositoryProtocol {
-    func fetchWeatherCity(city: String) async -> [WeatherData]
+    func fetchWeatherCity(city: String) async -> WeatherCityModel
 }
