@@ -12,7 +12,7 @@ import CoreLocation
 @Observable
 final class WeatherViewModel {
     
-    var weathercityModel = WeatherCityModel.init(weather: [], name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
+    var weathercityModel = WeatherCityModel.init(weather: [], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
     var citySeached: String
     var cityName: String = ""
@@ -24,6 +24,9 @@ final class WeatherViewModel {
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
         self.citySeached = citySeached
+        Task {
+            await getWeather()
+        }
     }
     
     @MainActor
@@ -36,6 +39,8 @@ final class WeatherViewModel {
         }
         
     }
+    
+    //MARK: - Weather API
     
     ///Get city name
     var city_name: String {
@@ -104,5 +109,16 @@ final class WeatherViewModel {
                 return description
         }
         return ""
+    }
+    
+    //MARK: - Current date
+    private func dateFormatter(timeStamp: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
+    }
+    
+    var date: String {
+        return dateFormatter(timeStamp: weathercityModel.dt)
     }
 }

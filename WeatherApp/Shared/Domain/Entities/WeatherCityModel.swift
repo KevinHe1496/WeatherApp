@@ -9,6 +9,7 @@ import Foundation
 
 struct WeatherCityModel: Codable, Equatable {
     let weather: [WeatherData]
+    var dt: Int
     var name: String
     let main: MainData
     let sys: Sys

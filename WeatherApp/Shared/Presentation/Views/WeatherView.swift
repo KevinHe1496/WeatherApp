@@ -11,8 +11,6 @@ import CoreLocation
 struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
-    let columns = Array(repeating: GridItem(.flexible(minimum: 20)), count: 1)
-    let network = NetworkWeatherCity()
     
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
@@ -43,28 +41,33 @@ struct WeatherView: View {
                 Text(viewModel.countryName)
                     .font(.system(size: 80))
                     .bold()
-                
-                
-                
+  
                 // City Name
                 Text("\(viewModel.weathercityModel.name)")
+                    .font(.title)
+                
+                // Date
+                Text(viewModel.date)
+                    .padding(.bottom)
                 
                 // Icon
                 Image(systemName: viewModel.getIcon)
                     .font(.system(size: 150))
                     .foregroundStyle(.white)
+                    .shadow(radius: 10, x: 7, y: 7)
+                
+                // Description
+                Text("\(viewModel.weatherDescription)")
+                    .foregroundStyle(.white)
+                    .bold()
+                    .padding(.bottom)
                 
                 // Temperature
                 Text(viewModel.temperature)
                     .font(.system(size: 80))
-                
-                // Description
-                
-                Text("\(viewModel.weatherDescription)")
-                
-                
+                    .bold()
+
                 // Temperatures
-                
                 HStack {
                     VStack{
                         Text("Max")
@@ -87,6 +90,10 @@ struct WeatherView: View {
                     .padding()
                     .border(FillShapeStyle())
                 }
+                .background()
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10, x: 7, y: 7)
+                
                 
                 Spacer()
             }

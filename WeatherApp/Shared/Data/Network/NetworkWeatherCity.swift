@@ -21,7 +21,7 @@ final class NetworkWeatherCity: NetworkWeatherCityProtocol {
     
     func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async -> WeatherCityModel {
         
-        var modelReturn = WeatherCityModel(weather: [WeatherData(id: 0, main: "...", description: "...", icon: "...")], name: "...", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: "..."))
+        var modelReturn = WeatherCityModel(weather: [WeatherData(id: 0, main: "...", description: "...", icon: "...")], dt: 0, name: "...", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: "..."))
         
         let urlString = "\(urlWeather)&lon=\(lon)&lat=\(lat)"
         
@@ -81,14 +81,14 @@ final class NetworkWeatherCity: NetworkWeatherCityProtocol {
 final class NetworkWeatherCityMock: NetworkWeatherCityProtocol  {
     func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async -> WeatherCityModel {
         
-        let model1 = WeatherCityModel(weather: [WeatherData(id: 1, main: "Cloudy", description: "light rain", icon: "300d")], name: "Quito", main: MainData(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 90), sys: Sys(country: "Ecuador"))
+        let model1 = WeatherCityModel(weather: [WeatherData(id: 1, main: "Cloudy", description: "light rain", icon: "300d")], dt: 0, name: "Quito", main: MainData(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 90), sys: Sys(country: "Ecuador"))
         
         return model1
     }
     
     func fetchWeatherCity(city: String) async throws -> WeatherCityModel {
         
-        let model1 = WeatherCityModel(weather: [WeatherData(id: 1, main: "Cloudy", description: "light rain", icon: "300d")], name: "Quito", main: MainData(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 90), sys: Sys(country: "Ecuador"))
+        let model1 = WeatherCityModel(weather: [WeatherData(id: 1, main: "Cloudy", description: "light rain", icon: "300d")], dt: 0, name: "Quito", main: MainData(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 90), sys: Sys(country: "Ecuador"))
         
         return model1
     }
