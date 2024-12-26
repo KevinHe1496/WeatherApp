@@ -82,10 +82,10 @@ struct WeatherView: View {
                     }
                     .padding()
                     .border(FillShapeStyle())
+                    
                     VStack{
                         Text("Humidity")
                         Text(viewModel.humidityWeather)
-                        
                     }
                     .padding()
                     .border(FillShapeStyle())
@@ -93,6 +93,7 @@ struct WeatherView: View {
                 .background()
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 10, x: 7, y: 7)
+                
                 
                 
                 Spacer()
