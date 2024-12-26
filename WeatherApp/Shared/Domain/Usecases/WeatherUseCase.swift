@@ -11,7 +11,7 @@ import Foundation
 protocol WeatherUseCaseProtocol {
     
     var repo: WeatherRepositoryProtocol {get set}
-    func fetchWeatherCity(city: String) async -> WeatherCityModel
+    func fetchWeatherCity(city: String) async throws -> WeatherCityModel
     
 }
 
@@ -24,8 +24,8 @@ final class WeatherUseCase: WeatherUseCaseProtocol {
         self.repo = repo
     }
     
-    func fetchWeatherCity(city: String = "") async -> WeatherCityModel {
-        return await repo.fetchWeatherCity(city: city)
+    func fetchWeatherCity(city: String = "") async throws -> WeatherCityModel {
+        return try await repo.fetchWeatherCity(city: city)
     }
 }
 
@@ -39,8 +39,8 @@ final class WeatherUseCaseMock: WeatherUseCaseProtocol {
         self.repo = repo
     }
     
-    func fetchWeatherCity(city: String) async -> WeatherCityModel {
-        return await repo.fetchWeatherCity(city: city)
+    func fetchWeatherCity(city: String) async throws -> WeatherCityModel {
+        return try await repo.fetchWeatherCity(city: city)
     }
 }
 
