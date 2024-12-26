@@ -16,10 +16,6 @@ final class WeatherViewModel {
     
     var citySeached: String
     var cityName: String = ""
-    var latitude: CLLocationDegrees = 0.0
-    var longitude: CLLocationDegrees = 0.0
-    
-    //    private var locationManager = CLLocationManager()
     
     @ObservationIgnored
     private var useCase: WeatherUseCaseProtocol
@@ -28,11 +24,6 @@ final class WeatherViewModel {
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
         self.citySeached = citySeached
-        //        locationManager.delegate = self
-        //        locationManager.requestWhenInUseAuthorization()
-        //        locationManager.requestLocation()
-        
-        //            await getCurrentWeatherLocation()
     }
     
     @MainActor
@@ -114,35 +105,4 @@ final class WeatherViewModel {
         }
         return ""
     }
-    
-    //    @MainActor
-    //    func getCurrentWeatherLocation() async {
-    //        let data = await NetworkWeatherCity().fetchWeather(lat: latitude, lon: longitude)
-    //        cityName = data.name
-    //        weather = data.weather
-    //        temperature = data.main.temp
-    //        country = data.sys.country
-    //        max_temperature = data.main.temp_max
-    //        min_Temperature = data.main.temp_min
-    //        humidity = data.main.humidity
-    
-    //    }
-    
-    //MARK: - CLLocationManagerDelegate
-    
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        if let location = locations.last {
-    //            longitude = location.coordinate.longitude
-    //            latitude = location.coordinate.latitude
-    //            Task {
-    //                await NetworkWeatherCity().fetchWeather(lat: latitude, lon: longitude)
-    //            }
-    //
-    //        }
-    //    }
-    //
-    //    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-    //        print(error.localizedDescription)
-    //    }
-    
 }
