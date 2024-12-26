@@ -12,7 +12,7 @@ import CoreLocation
 @Observable
 final class WeatherViewModel {
     
-    var weathercityModel = WeatherCityModel.init(weather: [], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
+    var weathercityModel = WeatherCityModel.init(weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
     var citySeached: String
     var cityName: String = ""
@@ -112,6 +112,7 @@ final class WeatherViewModel {
     }
     
     //MARK: - Current date
+    /// Format date (e.g. Monday, May 11, 2020)
     private func dateFormatter(timeStamp: Int) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long

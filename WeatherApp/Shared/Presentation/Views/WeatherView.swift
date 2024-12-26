@@ -11,6 +11,7 @@ import CoreLocation
 struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
+    @State var searchField = ""
     
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
@@ -21,18 +22,31 @@ struct WeatherView: View {
         ZStack {
             Image("")
                 .resizable()
-                .background(Color(red: 192/255, green: 196/255, blue: 201/255))
+            LinearGradient(colors: [Color(red: 22/255, green: 106/255, blue: 215/255), Color(red: 139/255, green: 133/255, blue: 254/255), Color(red: 94/255, green: 129/255, blue: 254/255)], startPoint: .bottom, endPoint: .top)
+                .ignoresSafeArea()
+
             VStack {
                 
                 // TextField
-                TextField("Search City", text: $viewModel.citySeached)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 350)
-                    .onSubmit {
-                        Task {
-                            await viewModel.getWeather()
+                HStack {
+                    TextField("Search City", text: $viewModel.citySeached)
+                        
+                        .frame(width: 270)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .onSubmit {
+                            Task {
+                                await viewModel.getWeather()
+                            }
                         }
+                    // Clear Button
+                    Button("Cancel") {
+                        viewModel.citySeached = ""
                     }
+                    .foregroundStyle(.white)
+                    .frame(width: 80, height: 35)
+                    .background(Color.secondary.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 3))
+                }
                 
                 Spacer()
                 
@@ -41,14 +55,17 @@ struct WeatherView: View {
                 Text(viewModel.countryName)
                     .font(.system(size: 80))
                     .bold()
+                    .foregroundStyle(.white)
   
                 // City Name
                 Text("\(viewModel.weathercityModel.name)")
                     .font(.title)
+                    .foregroundStyle(.white)
                 
                 // Date
                 Text(viewModel.date)
                     .padding(.bottom)
+                    .foregroundStyle(.white)
                 
                 // Icon
                 Image(systemName: viewModel.getIcon)
@@ -66,43 +83,47 @@ struct WeatherView: View {
                 Text(viewModel.temperature)
                     .font(.system(size: 80))
                     .bold()
+                    .foregroundStyle(.white)
 
                 // Temperatures
-                HStack {
-                    VStack{
+                HStack(spacing: 40) {
+                    VStack(spacing: 5){
+                        Image(systemName: "arrow.up.circle")
+                            .font(.system(size: 35))
                         Text("Max")
                         Text(viewModel.max_Temperature)
                     }
-                    .padding()
-                    .border(FillShapeStyle())
                     
-                    VStack{
+                    Divider().frame(height: 50).background(.white)
+                    
+                    VStack(spacing: 5){
+                        Image(systemName: "arrow.down.circle")
+                            .font(.system(size: 35))
                         Text("Min")
                         Text(viewModel.min_Temperature)
                     }
-                    .padding()
-                    .border(FillShapeStyle())
-                    
-                    VStack{
+                    Divider().frame(height: 50).background(.white)
+ 
+                    VStack(spacing: 5){
+                        Image(systemName: "thermometer.sun")
+                            .font(.system(size: 35))
                         Text("Humidity")
                         Text(viewModel.humidityWeather)
                     }
-                    .padding()
-                    .border(FillShapeStyle())
+                    
+                    
+                    
                 }
-                .background()
+                .padding(20)
+                .foregroundStyle(.white)
+                .background(Color.secondary.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 10, x: 7, y: 7)
-                
-                
-                
+
                 Spacer()
             }
-            
             .searchable(text: $viewModel.cityName)
-            
         }
-        
     }
 }
 
