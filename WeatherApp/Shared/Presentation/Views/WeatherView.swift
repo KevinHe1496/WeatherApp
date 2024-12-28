@@ -12,11 +12,10 @@ struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
     @State var searchField = ""
-    @State var localManager: LocationManager
     
-    init(viewModel: WeatherViewModel, localManager: LocationManager = LocationManager()) {
+    
+    init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
-        self.localManager = localManager
     }
     
     var body: some View {
@@ -45,9 +44,9 @@ struct WeatherView: View {
                                 .frame(width: 40, height: 35)
                                 .background(Color.secondary.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                                
+                            
                         }
-
+                        
                         // TextField Search City
                         TextField("Search City", text: $viewModel.citySeached)
                         
@@ -77,28 +76,37 @@ struct WeatherView: View {
                         .font(.system(size: 50))
                         .bold()
                         .foregroundStyle(.white)
+                        .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 3)
                     
-                    // City Name
-                    Text("\(viewModel.weathercityModel.name)")
-                        .foregroundStyle(.white)
                     
-                    // Date
-                    Text(viewModel.date)
-                        .foregroundStyle(.white)
-      
+                    HStack(spacing: 30) {
                         // Icon
                         Image(systemName: viewModel.getIcon)
-                            .font(.system(size: 120))
+                            .font(.system(size: 100))
                             .foregroundStyle(.white)
                             .shadow(radius: 10, x: 7, y: 7)
-                            .frame(width: 120, height: 120)
+                            .frame(width: 100, height: 100)
                             .padding(.top)
                             .padding(.bottom)
                         // Description
-                        Text("\(viewModel.weatherDescription)")
-                            .foregroundStyle(.white)
-                            .bold()
-
+                        VStack(alignment: .trailing, spacing: 5) {
+                            Text("\(viewModel.weatherDescription)")
+                                .font(.system(size: 25))
+                                .foregroundStyle(.white)
+                                .bold()
+                            // City Name
+                            Text("\(viewModel.weathercityModel.name)")
+                                .foregroundStyle(.white)
+                            // Date
+                            Text(viewModel.date)
+                                .foregroundStyle(.white)
+                        }
+                        .frame(width: 190)
+                        .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 3)
+                        
+                    }
+                 
+                    
                     // Temperature
                     Text(viewModel.temperature)
                         .font(.system(size: 80))
@@ -106,6 +114,7 @@ struct WeatherView: View {
                         .foregroundStyle(.white)
                         .padding(.top)
                         .padding(.bottom)
+                        .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 3)
                     
                     // Temperatures
                     VStack(spacing: 47) {
@@ -137,8 +146,8 @@ struct WeatherView: View {
             .padding(.top)
             .ignoresSafeArea(edges: .horizontal)
             
-        }
-        
+        } // Fin zStack
+
         .onAppear {
             Task {
                 await viewModel.getCurrentLocation()
@@ -149,5 +158,5 @@ struct WeatherView: View {
 }
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"), localManager: LocationManager())
+    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
 }
