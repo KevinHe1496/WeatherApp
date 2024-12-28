@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 ///Default Weather Repository
 final class DefaultWeatherReporitory: WeatherRepositoryProtocol {
+    
+    
     
     private var network: NetworkWeatherCityProtocol
     
@@ -18,6 +21,10 @@ final class DefaultWeatherReporitory: WeatherRepositoryProtocol {
     
     func fetchWeatherCity(city: String) async throws -> WeatherCityModel {
         return try await network.fetchWeatherCity(city: city)
+    }
+    
+    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async -> WeatherCityModel {
+        return await network.fetchWeather(lat: lat, lon: lon)
     }
 }
 
@@ -32,6 +39,10 @@ final class DefaultWeatherReporitoryMock: WeatherRepositoryProtocol {
     
     func fetchWeatherCity(city: String) async throws -> WeatherCityModel {
         return try await network.fetchWeatherCity(city: city)
+    }
+    
+    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async -> WeatherCityModel {
+        return await network.fetchWeather(lat: lon, lon: lat)
     }
   
 }

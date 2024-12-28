@@ -12,9 +12,11 @@ struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
     @State var searchField = ""
+    @State var localManager: LocationManager
     
-    init(viewModel: WeatherViewModel) {
+    init(viewModel: WeatherViewModel, localManager: LocationManager = LocationManager()) {
         self.viewModel = viewModel
+        self.localManager = localManager
     }
     
     var body: some View {
@@ -23,15 +25,33 @@ struct WeatherView: View {
             // Background
             LinearGradient(colors: [Color(red: 22/255, green: 106/255, blue: 215/255), Color(red: 139/255, green: 133/255, blue: 254/255), Color(red: 94/255, green: 129/255, blue: 254/255)], startPoint: .bottom, endPoint: .top)
                 .ignoresSafeArea()
-    
+            
             ScrollView {
                 VStack {
                     
-                    // TextField
+                    
                     HStack {
+                        // Current location Button
+                        Button {
+                            Task {
+                                await viewModel.getCurrentLocation()
+                            }
+                            viewModel.citySeached = ""
+                        } label: {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 21))
+                                .foregroundStyle(.white)
+                                .shadow(color: Color.black.opacity(0.20), radius: 5, x: 0, y: 6)
+                                .frame(width: 40, height: 35)
+                                .background(Color.secondary.opacity(0.3))
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                
+                        }
+
+                        // TextField Search City
                         TextField("Search City", text: $viewModel.citySeached)
                         
-                            .frame(width: 270)
+                            .frame(width: 230)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .onSubmit {
                                 Task {
@@ -47,35 +67,38 @@ struct WeatherView: View {
                         .background(Color.secondary.opacity(0.3))
                         .clipShape(RoundedRectangle(cornerRadius: 3))
                     }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
+                    
                     Spacer()
                     // Country Name
                     Text(viewModel.countryName)
-                        .font(.system(size: 80))
+                        .font(.system(size: 50))
                         .bold()
                         .foregroundStyle(.white)
                     
                     // City Name
                     Text("\(viewModel.weathercityModel.name)")
-                        .font(.title)
                         .foregroundStyle(.white)
                     
                     // Date
                     Text(viewModel.date)
                         .foregroundStyle(.white)
-                    
-                    // Icon
-                    Image(systemName: viewModel.getIcon)
-                        .font(.system(size: 150))
-                        .foregroundStyle(.white)
-                        .shadow(radius: 10, x: 7, y: 7)
-                        .padding(.top)
-                    
-                    // Description
-                    Text("\(viewModel.weatherDescription)")
-                        .foregroundStyle(.white)
-                        .bold()
-                    
-                    
+      
+                        // Icon
+                        Image(systemName: viewModel.getIcon)
+                            .font(.system(size: 120))
+                            .foregroundStyle(.white)
+                            .shadow(radius: 10, x: 7, y: 7)
+                            .frame(width: 120, height: 120)
+                            .padding(.top)
+                            .padding(.bottom)
+                        // Description
+                        Text("\(viewModel.weatherDescription)")
+                            .foregroundStyle(.white)
+                            .bold()
+
                     // Temperature
                     Text(viewModel.temperature)
                         .font(.system(size: 80))
@@ -104,18 +127,27 @@ struct WeatherView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 10, x: 7, y: 7)
                     
-                    
+                    Spacer()
                 }
                 
                 .searchable(text: $viewModel.cityName)
+                
             }
+            
             .padding(.top)
             .ignoresSafeArea(edges: .horizontal)
+            
+        }
+        
+        .onAppear {
+            Task {
+                await viewModel.getCurrentLocation()
+            }
             
         }
     }
 }
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
+    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"), localManager: LocationManager())
 }

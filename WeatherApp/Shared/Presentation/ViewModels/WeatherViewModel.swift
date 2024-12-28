@@ -14,8 +14,10 @@ final class WeatherViewModel {
     
     var weathercityModel = WeatherCityModel(weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
+    var locationManager = LocationManager()
     var citySeached: String
     var cityName: String = ""
+    var status = Status.none
     
     @ObservationIgnored
     private var useCase: WeatherUseCaseProtocol
@@ -24,19 +26,30 @@ final class WeatherViewModel {
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
         self.citySeached = citySeached
-        Task {
-            await getWeather()
-        }
+        
     }
     
     @MainActor
-    func getWeather() async  {
+    func getWeather() async {
+        self.status = .loading
         do {
             let data = try await useCase.fetchWeatherCity(city: citySeached)
-            weathercityModel = data
+            self.weathercityModel = data
+            self.status = .loaded
+            
         } catch {
             print("Error en obtener la data")
         }
+        
+    }
+    
+    @MainActor
+    func getCurrentLocation() async {
+        self.status = .loading
+        
+        let locationData = await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
+        self.weathercityModel = locationData
+        self.status = .loaded
         
     }
     
