@@ -64,13 +64,13 @@ final class WeatherViewModel {
     /// Get min temperature
     var min_Temperature: String {
         let min_Temperature = weathercityModel.main.temp_min
-        return String(format: "%.1f", min_Temperature)
+        return String(format: "%.0f", min_Temperature)
     }
     
     /// Get max temperature
     var max_Temperature: String {
         let max_Temperature = weathercityModel.main.temp_max
-        return String(format: "%.1f", max_Temperature)
+        return String(format: "%.0f", max_Temperature)
     }
     
     /// Get himidity
@@ -82,7 +82,7 @@ final class WeatherViewModel {
     /// Get Feels Like
     var feelsLike: String {
         let feels = weathercityModel.main.feels_like
-        return String(format: "%.01f", feels)
+        return String(format: "%.0f", feels)
     }
     
     /// Get Icon
