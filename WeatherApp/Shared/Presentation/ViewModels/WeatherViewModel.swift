@@ -12,7 +12,7 @@ import CoreLocation
 @Observable
 final class WeatherViewModel {
     
-    var weathercityModel = WeatherCityModel.init(weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
+    var weathercityModel = WeatherCityModel(weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
     var citySeached: String
     var cityName: String = ""
@@ -51,19 +51,25 @@ final class WeatherViewModel {
     /// Get min temperature
     var min_Temperature: String {
         let min_Temperature = weathercityModel.main.temp_min
-        return String(format: "%.1f °", min_Temperature)
+        return String(format: "%.1f", min_Temperature)
     }
     
     /// Get max temperature
     var max_Temperature: String {
         let max_Temperature = weathercityModel.main.temp_max
-        return String(format: "%.1f °", max_Temperature)
+        return String(format: "%.1f", max_Temperature)
     }
     
     /// Get himidity
     var humidityWeather: String {
         let humidity = weathercityModel.main.humidity
-        return String("\(humidity) %")
+        return String("\(humidity)")
+    }
+    
+    /// Get Feels Like
+    var feelsLike: String {
+        let feels = weathercityModel.main.feels_like
+        return String(format: "%.01f", feels)
     }
     
     /// Get Icon
