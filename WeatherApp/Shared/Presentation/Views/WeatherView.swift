@@ -12,10 +12,12 @@ struct WeatherView: View {
     
     @State var viewModel: WeatherViewModel
     @State var searchField = ""
+    @State var weather7DaysViewModel: Weather7DaysViewModel
     
     
-    init(viewModel: WeatherViewModel) {
+    init(viewModel: WeatherViewModel, weather7DaysViewModel: Weather7DaysViewModel) {
         self.viewModel = viewModel
+        self.weather7DaysViewModel = weather7DaysViewModel
     }
     
     var body: some View {
@@ -151,6 +153,7 @@ struct WeatherView: View {
         .onAppear {
             Task {
                 await viewModel.getCurrentLocation()
+                await weather7DaysViewModel.get7DaysWeather()
             }
             
         }
@@ -158,5 +161,5 @@ struct WeatherView: View {
 }
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
+    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"), weather7DaysViewModel: Weather7DaysViewModel())
 }

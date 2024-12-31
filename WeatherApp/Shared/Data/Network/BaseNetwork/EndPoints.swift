@@ -10,4 +10,5 @@ import Foundation
 /// EndPotins Server Side
 struct EndPoints {
     static let weatherCity = "data/2.5/weather"
+    static let weatherFor7Days = "data/2.5/forecast"
 }

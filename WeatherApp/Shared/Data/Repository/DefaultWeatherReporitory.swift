@@ -11,8 +11,6 @@ import CoreLocation
 ///Default Weather Repository
 final class DefaultWeatherReporitory: WeatherRepositoryProtocol {
     
-    
-    
     private var network: NetworkWeatherCityProtocol
     
     init(network: NetworkWeatherCityProtocol = NetworkWeatherCity()) {
