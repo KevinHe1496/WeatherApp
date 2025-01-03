@@ -147,8 +147,8 @@ struct WeatherView: View {
                 HStack(spacing: 50) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: rows) {
-                            ForEach(weather7DaysViewModel.dataWeather7Days.list, id: \.main.temp) { item in
-                                DetailForecastView(icon: weather7DaysViewModel.getIcon, date: weather7DaysViewModel.getTime(dateTime: item.dt_txt), temp: "\(String(format: "%.0f", item.main.temp))", unit: "°C")
+                            ForEach(weather7DaysViewModel.dataWeather7Days.list, id: \.dt) { item in
+                                DetailForecastView(icon: weather7DaysViewModel.iconForWeatherID(item.weather[0].id), date: weather7DaysViewModel.getTime(dateTime: item.dt_txt), temp: "\(String(format: "%.0f", item.main.temp))", unit: "°C")
                             }
        
                         }

@@ -23,7 +23,6 @@ final class WeatherViewModel: ObservableObject {
     
     private var useCase: WeatherUseCaseProtocol
     private var locationManager = LocationManager()
-//    private var viewModelWeather7Days: Weather7DaysViewModel
     
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
@@ -38,12 +37,7 @@ final class WeatherViewModel: ObservableObject {
             let data = try await useCase.fetchWeatherCity(city: citySeached)
             self.weathercityModel = data
             self.latitude = data.coord.lat
-            print(latitude)
             self.longitude = data.coord.lon
-            print(longitude)
-//            Task {
-//               await viewModelWeather7Days.getSevenDaysForecastCity(lat: latitude, lon: longitude)
-//            }
             
             self.status = .loaded
         } catch {

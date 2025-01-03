@@ -10,7 +10,7 @@ import Combine
 
 final class Weather7DaysViewModel: ObservableObject {
 
-    @Published var dataWeather7Days = Weather7DaysModel(city: City(name: ""), list: [ListData(weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), dt_txt: "")])
+    @Published var dataWeather7Days = Weather7DaysModel(city: City(name: ""), list: [ListData(dt: 0, weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), dt_txt: "")])
     
     @Published var status = Status.none
     @Published var cityName: String = ""
@@ -30,9 +30,7 @@ final class Weather7DaysViewModel: ObservableObject {
         self.status = .loading
         do {
             dataWeather7Days = try await useCase.fetchWeather(lat: lat, lon: lon)
-            print(dataWeather7Days)
             cityName = dataWeather7Days.city.name
-            print(cityName)
             self.status = .loaded
             
         } catch {
@@ -79,14 +77,7 @@ final class Weather7DaysViewModel: ObservableObject {
         return fistListData.weather
     }
     
-    var getIcon: String {
-        guard let weatherID = weather.first?.id else {
-            return "questionmark"
-        }
-        return iconForWeatherID(weatherID)
-    }
-    
-    private func iconForWeatherID(_ id: Int) -> String {
+     func iconForWeatherID(_ id: Int) -> String {
                 switch id {
                 case 200...232:
                     return "cloud.bolt.rain.fill"
