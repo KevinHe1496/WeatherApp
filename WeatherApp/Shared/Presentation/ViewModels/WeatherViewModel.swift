@@ -14,7 +14,6 @@ final class WeatherViewModel: ObservableObject {
     
     @Published var weathercityModel = WeatherCityModel(coord: Coord(lon: 0.0, lat: 0.0), weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
-    
     @Published var citySeached: String
     @Published var cityName: String = ""
     @Published var status = Status.none
@@ -24,7 +23,7 @@ final class WeatherViewModel: ObservableObject {
     
     private var useCase: WeatherUseCaseProtocol
     private var locationManager = LocationManager()
-    
+//    private var viewModelWeather7Days: Weather7DaysViewModel
     
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
@@ -38,6 +37,14 @@ final class WeatherViewModel: ObservableObject {
         do {
             let data = try await useCase.fetchWeatherCity(city: citySeached)
             self.weathercityModel = data
+            self.latitude = data.coord.lat
+            print(latitude)
+            self.longitude = data.coord.lon
+            print(longitude)
+//            Task {
+//               await viewModelWeather7Days.getSevenDaysForecastCity(lat: latitude, lon: longitude)
+//            }
+            
             self.status = .loaded
         } catch {
             self.status = .error(error: "Error en obtener data weather \(error.localizedDescription)")
@@ -56,11 +63,10 @@ final class WeatherViewModel: ObservableObject {
         } catch {
             self.status = .error(error: "Error en obtener la locacion \(error.localizedDescription)")
         }
-        
     }
     
     //MARK: - Weather API
-
+    
     
     ///Get city name
     var city_name: String {
@@ -95,22 +101,22 @@ final class WeatherViewModel: ObservableObject {
     /// Get Icon
     var getIcon: String {
         if weathercityModel.weather.count != 0 {
-           let id = weathercityModel.weather[0].id
-                switch id {
-                case 200...232:
-                    return "cloud.bolt.rain.fill"
-                case 300...321:
-                    return "cloud.drizzle.fill"
-                case 500...531:
-                    return "cloud.rain.fill"
-                case 600...622:
-                    return "cloud.snow.fill"
-                case 701...781:
-                    return "cloud.fog"
-                case 801...804:
-                    return "cloud.fill"
-                default:
-                    return "sun.max.fill"
+            let id = weathercityModel.weather[0].id
+            switch id {
+            case 200...232:
+                return "cloud.bolt.rain.fill"
+            case 300...321:
+                return "cloud.drizzle.fill"
+            case 500...531:
+                return "cloud.rain.fill"
+            case 600...622:
+                return "cloud.snow.fill"
+            case 701...781:
+                return "cloud.fog"
+            case 801...804:
+                return "cloud.fill"
+            default:
+                return "sun.max.fill"
             }
         }
         return ""
@@ -119,20 +125,20 @@ final class WeatherViewModel: ObservableObject {
     ///Get the temperature
     var temperature: String {
         let temp = weathercityModel.main.temp
-            return String(format: "%.0f °", temp)
+        return String(format: "%.0f °", temp)
     }
     
-//    Get the country
+    //    Get the country
     var countryName: String {
         let ct = weathercityModel.sys.country
-            return ct
+        return ct
     }
     
     ///Get Description
     var weatherDescription: String {
         if weathercityModel.weather.count != 0 {
             let description = weathercityModel.weather[0].description
-                return description
+            return description
         }
         return ""
     }

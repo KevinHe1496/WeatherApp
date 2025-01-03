@@ -9,52 +9,57 @@ import Foundation
 import Combine
 
 final class Weather7DaysViewModel: ObservableObject {
-    
-    
-    @Published var weather7Days = Weather7DaysModel(list: [ListData(weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0))], city: City(name: ""))
+
+    @Published var dataWeather7Days = Weather7DaysModel(city: City(name: ""), list: [ListData(weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0))])
     
     @Published var status = Status.none
-    @Published var cityname = ""
-
+    @Published var cityName: String = ""
+  
     private var useCase: Weather7DaysUseCaseProtocol
-    
+    private var locationManager = LocationManager()
+
     init(useCase: Weather7DaysUseCaseProtocol = Weather7DaysUseCase()) {
         self.useCase = useCase
     }
     
+    
+    //MARK: - Get 7 days Forecast for city
     @MainActor
-    func get7DaysWeather(lat: Double, lon: Double) async {
-        
+    func getSevenDaysForecastCity(lat: Double, lon: Double) async {
+
+        self.status = .loading
         do {
-            let data = try await useCase.fetchWeather(lat: lat, lon: lon)
-            self.weather7Days = data
+            dataWeather7Days = try await useCase.fetchWeather(lat: lat, lon: lon)
+            cityName = dataWeather7Days.city.name
+            self.status = .loaded
             
         } catch {
-            self.status = .error(error: "Error en obtener data weather7days\(error.localizedDescription)")
+            self.status = .error(error: "Error en obtener el pronostico de 7 dias \(error.localizedDescription)")
         }
+       
     }
+    
+    
+    //MARK: - Get 7 days Forecast current Location
+    @MainActor
+    func getSevenDaysForecast() async {
+
+        self.status = .loading
+        do {
+            dataWeather7Days = try await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
+            cityName = dataWeather7Days.city.name
+            self.status = .loaded
+            
+        } catch {
+            self.status = .error(error: "Error en obtener el pronostico de 7 dias \(error.localizedDescription)")
+        }
+       
+    }
+    
 
     public func dateFormatter(timeStamp: Int) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
     }
-    
-    var city: String {
-        if let city = weather7Days.city.name {
-            print(city)
-            return city
-        }
-        return ""
-    }
-    
-    var weatherDataDays: [WeatherDataDays] {
-        if self.weather7Days.list.count != 0 {
-            if let weatherdata = weather7Days.list[0].weather {
-                return weatherdata
-            }
-        }
-        return []
-    }
-
 }

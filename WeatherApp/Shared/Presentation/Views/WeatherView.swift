@@ -33,6 +33,7 @@ struct WeatherView: View {
                         Button {
                             Task {
                                 await viewModel.getLocation()
+                                await weather7DaysViewModel.getSevenDaysForecast()
                             }
                             viewModel.citySeached = ""
                         } label: {
@@ -54,7 +55,7 @@ struct WeatherView: View {
                             .onSubmit {
                                 Task {
                                     await viewModel.getWeather()
-                                    
+                                    await weather7DaysViewModel.getSevenDaysForecastCity(lat: viewModel.latitude, lon: viewModel.longitude)
                                 }
                             }
                         // Clear Button
@@ -141,7 +142,7 @@ struct WeatherView: View {
                 HStack(spacing: 50) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: rows) {
-                            Text(weather7DaysViewModel.cityname)
+                            Text(weather7DaysViewModel.cityName)
        
                         }
                         
@@ -171,6 +172,7 @@ struct WeatherView: View {
         .onAppear {
             Task {
                 await viewModel.getLocation()
+                await weather7DaysViewModel.getSevenDaysForecast()
             }
         }
     }
