@@ -52,7 +52,7 @@ final class NetworkWeather7Days: NetworkWeather7DaysProtocol {
 final class NetworkWeather7DaysMock: NetworkWeather7DaysProtocol {
     func fetchWeather(lat: Double, lon: Double) async throws -> Weather7DaysModel {
         
-        let model1 = Weather7DaysModel(city: City(name: "Quito"), list: [ListData(weather: [WeatherDataDays(id: 1, main: "Cloudy", description: "light rain")], main: MainDataDays(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 50))])
+        let model1 = Weather7DaysModel(city: City(name: "Quito"), list: [ListData(weather: [WeatherDataDays(id: 1, main: "Cloudy", description: "light rain")], main: MainDataDays(temp: 10.52, feels_like: 8.00, temp_min: 3.52, temp_max: 15.5, humidity: 50), dt_txt: "")])
         
         return model1
     }

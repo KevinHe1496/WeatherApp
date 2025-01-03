@@ -14,6 +14,8 @@ struct WeatherView: View {
     @StateObject var viewModel: WeatherViewModel
     @StateObject var weather7DaysViewModel = Weather7DaysViewModel()
     @StateObject var locationManager = LocationManager()
+    @State private var isLoading: Bool = false
+
     
     let rows = Array(repeating: GridItem(.flexible(minimum: 20)), count: 1)
 
@@ -32,8 +34,10 @@ struct WeatherView: View {
                         // Current location Button
                         Button {
                             Task {
+                                isLoading = true // Mostrar ProgressBar
                                 await viewModel.getLocation()
                                 await weather7DaysViewModel.getSevenDaysForecast()
+                                isLoading = false // esconder ProgressBar
                             }
                             viewModel.citySeached = ""
                         } label: {
@@ -54,6 +58,7 @@ struct WeatherView: View {
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .onSubmit {
                                 Task {
+                                    
                                     await viewModel.getWeather()
                                     await weather7DaysViewModel.getSevenDaysForecastCity(lat: viewModel.latitude, lon: viewModel.longitude)
                                 }
@@ -71,7 +76,6 @@ struct WeatherView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
                     
-                    Spacer()
                     // Country Name
                     Text(viewModel.countryName)
                         .font(.system(size: 50))
@@ -137,42 +141,56 @@ struct WeatherView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 10, x: 7, y: 7)
                     
-                    Spacer()
+                    
                 }
+                
                 HStack(spacing: 50) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHGrid(rows: rows) {
-                            Text(weather7DaysViewModel.cityName)
+                            ForEach(weather7DaysViewModel.dataWeather7Days.list, id: \.main.temp) { item in
+                                DetailForecastView(icon: weather7DaysViewModel.getIcon, date: weather7DaysViewModel.getTime(dateTime: item.dt_txt), temp: "\(String(format: "%.0f", item.main.temp))", unit: "°C")
+                            }
        
                         }
                         
                     }
-//                    .padding(.horizontal, 16)
-                    .foregroundStyle(.white)
+                    
                 }
-                .padding()
-                .background(Color.secondary.opacity(0.3))
+                
+                
+                
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 10, x: 7, y: 7)
                 
-                
                 .searchable(text: $viewModel.cityName)
+                
             }
             
-            .padding(.top)
             .ignoresSafeArea(edges: .horizontal)
             
 
             
- 
+            // ProgressView
+            if isLoading {
+                Color.black.opacity(0.4) // Fondo semitransparente
+                    .ignoresSafeArea()
+                ProgressView("Cargando...")
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+            }
             
             
         } // Fin zStack
 
         .onAppear {
             Task {
+                isLoading = true
+                    defer { isLoading = false }
                 await viewModel.getLocation()
                 await weather7DaysViewModel.getSevenDaysForecast()
+                
             }
         }
     }

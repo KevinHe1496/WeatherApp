@@ -17,9 +17,9 @@ struct City: Codable {
 }
 
 struct ListData: Codable {
-    
     var weather: [WeatherDataDays]
     let main: MainDataDays
+    let dt_txt: String
 }
 
 struct WeatherDataDays: Codable, Identifiable, Hashable {
