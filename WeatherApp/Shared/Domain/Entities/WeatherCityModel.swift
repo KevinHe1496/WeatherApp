@@ -8,11 +8,17 @@
 import Foundation
 
 struct WeatherCityModel: Codable, Equatable {
+    let coord: Coord
     let weather: [WeatherData]
     var dt: Int
     var name: String
     let main: MainData
     let sys: Sys
+}
+
+struct Coord: Codable, Equatable {
+    let lon: Double
+    let lat: Double
 }
 
 struct WeatherData: Codable, Identifiable, Equatable {

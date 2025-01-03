@@ -7,19 +7,16 @@
 
 import SwiftUI
 import CoreLocation
+import Combine
 
 struct WeatherView: View {
     
-    @State var viewModel: WeatherViewModel
-    @State var searchField = ""
-    @State var weather7DaysViewModel: Weather7DaysViewModel
+    @StateObject var viewModel: WeatherViewModel
+    @StateObject var weather7DaysViewModel = Weather7DaysViewModel()
+    @StateObject var locationManager = LocationManager()
     
-    
-    init(viewModel: WeatherViewModel, weather7DaysViewModel: Weather7DaysViewModel) {
-        self.viewModel = viewModel
-        self.weather7DaysViewModel = weather7DaysViewModel
-    }
-    
+    let rows = Array(repeating: GridItem(.flexible(minimum: 20)), count: 1)
+
     var body: some View {
         
         ZStack {
@@ -35,7 +32,7 @@ struct WeatherView: View {
                         // Current location Button
                         Button {
                             Task {
-                                await viewModel.getCurrentLocation()
+                                await viewModel.getLocation()
                             }
                             viewModel.citySeached = ""
                         } label: {
@@ -57,6 +54,7 @@ struct WeatherView: View {
                             .onSubmit {
                                 Task {
                                     await viewModel.getWeather()
+                                    
                                 }
                             }
                         // Clear Button
@@ -140,26 +138,44 @@ struct WeatherView: View {
                     
                     Spacer()
                 }
+                HStack(spacing: 50) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHGrid(rows: rows) {
+                            Text(weather7DaysViewModel.cityname)
+       
+                        }
+                        
+                    }
+//                    .padding(.horizontal, 16)
+                    .foregroundStyle(.white)
+                }
+                .padding()
+                .background(Color.secondary.opacity(0.3))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10, x: 7, y: 7)
+                
                 
                 .searchable(text: $viewModel.cityName)
-                
             }
             
             .padding(.top)
             .ignoresSafeArea(edges: .horizontal)
             
+
+            
+ 
+            
+            
         } // Fin zStack
 
         .onAppear {
             Task {
-                await viewModel.getCurrentLocation()
-                await weather7DaysViewModel.get7DaysWeather()
+                await viewModel.getLocation()
             }
-            
         }
     }
 }
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"), weather7DaysViewModel: Weather7DaysViewModel())
+    WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
 }

@@ -8,26 +8,27 @@
 import Foundation
 
 struct Weather7DaysModel: Codable {
-    let list: [ListData]
+    var list: [ListData]
     let city: City
 }
 
 struct City: Codable {
-    let name: String
+    let name: String?
 }
 
 struct ListData: Codable {
-    let weather: [WeatherDataDays]
-    let main: MainDataDays
+    
+    var weather: [WeatherDataDays]?
+    let main: MainDataDays?
 }
 
-struct WeatherDataDays: Codable, Identifiable {
-    let id: Int
-    let main: String
-    let description: String
+struct WeatherDataDays: Codable, Identifiable, Hashable {
+    let id: Int?
+    let main: String?
+    let description: String?
 }
 
 struct MainDataDays: Codable {
-    let temp, feels_like, temp_min, temp_max: Double
-    let humidity: Int
+    let temp, feels_like, temp_min, temp_max: Double?
+    let humidity: Int?
 }

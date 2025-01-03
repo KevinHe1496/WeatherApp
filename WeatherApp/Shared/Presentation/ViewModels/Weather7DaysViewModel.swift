@@ -6,38 +6,55 @@
 //
 
 import Foundation
+import Combine
 
-@Observable
-final class Weather7DaysViewModel {
+final class Weather7DaysViewModel: ObservableObject {
     
-    var weather7Days = Weather7DaysModel(list: [ListData(weather: [WeatherDataDays(id: 1, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0))], city: City(name: ""))
     
-    var longitude: Double = 0.0
-    var latitude: Double = 0.0
-    var status = Status.none
-    var locationManager = LocationManager()
+    @Published var weather7Days = Weather7DaysModel(list: [ListData(weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0))], city: City(name: ""))
     
-    @ObservationIgnored
+    @Published var status = Status.none
+    @Published var cityname = ""
+
     private var useCase: Weather7DaysUseCaseProtocol
     
     init(useCase: Weather7DaysUseCaseProtocol = Weather7DaysUseCase()) {
         self.useCase = useCase
-        Task {
-            await get7DaysWeather()
-        }
     }
     
-   
     @MainActor
-    func get7DaysWeather() async {
-        self.status = .loading
+    func get7DaysWeather(lat: Double, lon: Double) async {
+        
         do {
-            let data = try await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
+            let data = try await useCase.fetchWeather(lat: lat, lon: lon)
             self.weather7Days = data
-            self.status = .loaded
+            
         } catch {
-            print("Error en obtener la data")
+            self.status = .error(error: "Error en obtener data weather7days\(error.localizedDescription)")
         }
     }
+
+    public func dateFormatter(timeStamp: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
+    }
     
+    var city: String {
+        if let city = weather7Days.city.name {
+            print(city)
+            return city
+        }
+        return ""
+    }
+    
+    var weatherDataDays: [WeatherDataDays] {
+        if self.weather7Days.list.count != 0 {
+            if let weatherdata = weather7Days.list[0].weather {
+                return weatherdata
+            }
+        }
+        return []
+    }
+
 }

@@ -11,5 +11,5 @@ import CoreLocation
 /// Repository Protocol
 protocol WeatherRepositoryProtocol {
     func fetchWeatherCity(city: String) async throws -> WeatherCityModel
-    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async  -> WeatherCityModel
+    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws -> WeatherCityModel
 }

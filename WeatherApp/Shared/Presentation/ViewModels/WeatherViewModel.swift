@@ -9,26 +9,29 @@ import Foundation
 import Combine
 import CoreLocation
 
-@Observable
-final class WeatherViewModel {
+
+final class WeatherViewModel: ObservableObject {
     
-    var weathercityModel = WeatherCityModel(weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
+    @Published var weathercityModel = WeatherCityModel(coord: Coord(lon: 0.0, lat: 0.0), weather: [WeatherData(id: 0, main: "", description: "", icon: "")], dt: 0, name: "", main: MainData(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), sys: Sys(country: ""))
     
-    var locationManager = LocationManager()
-    var citySeached: String
-    var cityName: String = ""
-    var status = Status.none
     
-    @ObservationIgnored
+    @Published var citySeached: String
+    @Published var cityName: String = ""
+    @Published var status = Status.none
+    @Published var longitude: Double = 0.0
+    @Published var latitude: Double = 0.0
+    
+    
     private var useCase: WeatherUseCaseProtocol
+    private var locationManager = LocationManager()
     
     
     init(useCase: WeatherUseCaseProtocol = WeatherUseCase(), citySeached: String = ""){
         self.useCase = useCase
         self.citySeached = citySeached
-        
     }
     
+    //MARK: - Get Weather
     @MainActor
     func getWeather() async {
         self.status = .loading
@@ -36,24 +39,28 @@ final class WeatherViewModel {
             let data = try await useCase.fetchWeatherCity(city: citySeached)
             self.weathercityModel = data
             self.status = .loaded
-            
         } catch {
-            print("Error en obtener la data")
+            self.status = .error(error: "Error en obtener data weather \(error.localizedDescription)")
+        }
+    }
+    
+    
+    //MARK: - Get Location
+    @MainActor
+    func getLocation() async {
+        self.status = .loading
+        do {
+            let data = try await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
+            self.weathercityModel = data
+            self.status = .loaded
+        } catch {
+            self.status = .error(error: "Error en obtener la locacion \(error.localizedDescription)")
         }
         
     }
     
-    @MainActor
-    func getCurrentLocation() async {
-        self.status = .loading
-        
-        let locationData = await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
-        self.weathercityModel = locationData
-        self.status = .loaded
-        
-    }
-    
     //MARK: - Weather API
+
     
     ///Get city name
     var city_name: String {
@@ -134,6 +141,7 @@ final class WeatherViewModel {
     /// Format date (e.g. Monday, May 11, 2020)
     private func dateFormatter(timeStamp: Int) -> String {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "es_ES")
         formatter.dateStyle = .long
         return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timeStamp)))
     }
