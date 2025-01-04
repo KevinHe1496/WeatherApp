@@ -16,11 +16,9 @@ final class WeatherViewModel: ObservableObject {
     
     @Published var citySeached: String
     @Published var cityName: String = ""
-    @Published var status = Status.none
     @Published var longitude: Double = 0.0
     @Published var latitude: Double = 0.0
-    
-    
+ 
     private var useCase: WeatherUseCaseProtocol
     private var locationManager = LocationManager()
     
@@ -32,16 +30,13 @@ final class WeatherViewModel: ObservableObject {
     //MARK: - Get Weather
     @MainActor
     func getWeather() async {
-        self.status = .loading
         do {
             let data = try await useCase.fetchWeatherCity(city: citySeached)
             self.weathercityModel = data
             self.latitude = data.coord.lat
             self.longitude = data.coord.lon
-            
-            self.status = .loaded
         } catch {
-            self.status = .error(error: "Error en obtener data weather \(error.localizedDescription)")
+            print("Error en obtener data weather \(error.localizedDescription)")
         }
     }
     
@@ -49,13 +44,11 @@ final class WeatherViewModel: ObservableObject {
     //MARK: - Get Location
     @MainActor
     func getLocation() async {
-        self.status = .loading
         do {
             let data = try await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
             self.weathercityModel = data
-            self.status = .loaded
         } catch {
-            self.status = .error(error: "Error en obtener la locacion \(error.localizedDescription)")
+            print("Error en obtener la locacion \(error.localizedDescription)")
         }
     }
     

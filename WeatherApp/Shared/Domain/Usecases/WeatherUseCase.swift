@@ -30,7 +30,7 @@ final class WeatherUseCase: WeatherUseCaseProtocol {
         return try await repo.fetchWeatherCity(city: city)
     }
     
-    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws-> WeatherCityModel {
+    func fetchWeather(lat: CLLocationDegrees, lon: CLLocationDegrees) async throws -> WeatherCityModel {
         return try await repo.fetchWeather(lat: lat, lon: lon)
     }
     

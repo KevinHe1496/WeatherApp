@@ -12,7 +12,21 @@ struct RootView: View {
     @Environment(AppState.self) var appState
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch appState.status {
+
+        case .loading:
+            withAnimation {
+                LoadingView()
+            }
+        case .loaded:
+            withAnimation {
+                WeatherView()
+            }
+        case .error(error: let errorString):
+            withAnimation {
+                ErrorView(textError: errorString)
+            }
+        }
     }
 }
 

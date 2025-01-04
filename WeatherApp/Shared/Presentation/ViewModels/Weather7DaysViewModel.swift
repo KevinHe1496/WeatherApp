@@ -12,7 +12,7 @@ final class Weather7DaysViewModel: ObservableObject {
 
     @Published var dataWeather7Days = Weather7DaysModel(city: City(name: ""), list: [ListData(dt: 0, weather: [WeatherDataDays(id: 0, main: "", description: "")], main: MainDataDays(temp: 0.0, feels_like: 0.0, temp_min: 0.0, temp_max: 0.0, humidity: 0), dt_txt: "")])
     
-    @Published var status = Status.none
+   
     @Published var cityName: String = ""
   
     private var useCase: Weather7DaysUseCaseProtocol
@@ -26,17 +26,12 @@ final class Weather7DaysViewModel: ObservableObject {
     //MARK: - Get 7 days Forecast for city
     @MainActor
     func getSevenDaysForecastCity(lat: Double, lon: Double) async {
-
-        self.status = .loading
         do {
             dataWeather7Days = try await useCase.fetchWeather(lat: lat, lon: lon)
             cityName = dataWeather7Days.city.name
-            self.status = .loaded
-            
         } catch {
-            self.status = .error(error: "Error en obtener el pronostico de 7 dias \(error.localizedDescription)")
+            print("Error en obtener el pronostico de 7 dias: \(error.localizedDescription) ")
         }
-       
     }
     
     
@@ -44,14 +39,11 @@ final class Weather7DaysViewModel: ObservableObject {
     @MainActor
     func getSevenDaysForecast() async {
 
-        self.status = .loading
         do {
             dataWeather7Days = try await useCase.fetchWeather(lat: locationManager.userLatitude, lon: locationManager.userLongitude)
             cityName = dataWeather7Days.city.name
-            self.status = .loaded
-            
         } catch {
-            self.status = .error(error: "Error en obtener el pronostico de 7 dias \(error.localizedDescription)")
+           print("Error en obtener el pronostico de 7 dias : \(error.localizedDescription)")
         }
        
     }

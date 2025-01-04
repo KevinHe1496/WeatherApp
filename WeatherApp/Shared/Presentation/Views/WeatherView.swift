@@ -11,13 +11,18 @@ import Combine
 
 struct WeatherView: View {
     
-    @StateObject var viewModel: WeatherViewModel
+    @Environment(AppState.self) var appState
+    
+    @State var viewModel: WeatherViewModel
     @StateObject var weather7DaysViewModel = Weather7DaysViewModel()
     @StateObject var locationManager = LocationManager()
     @State private var isLoading: Bool = false
-
     
     let rows = Array(repeating: GridItem(.flexible(minimum: 20)), count: 1)
+    
+    init(viewModel: WeatherViewModel = WeatherViewModel()) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         
@@ -175,7 +180,9 @@ struct WeatherView: View {
                 Color.black.opacity(0.4) // Fondo semitransparente
                     .ignoresSafeArea()
                 ProgressView("Cargando...")
+                    .tint(.black)
                     .padding()
+                    .foregroundStyle(.black)
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 10)
@@ -198,4 +205,5 @@ struct WeatherView: View {
 
 #Preview {
     WeatherView(viewModel: WeatherViewModel(citySeached: "Quito"))
+        .environment(AppState())
 }
