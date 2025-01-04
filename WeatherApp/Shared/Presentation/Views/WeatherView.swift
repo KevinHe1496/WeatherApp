@@ -13,7 +13,7 @@ struct WeatherView: View {
     
     @Environment(AppState.self) var appState
     
-    @State var viewModel: WeatherViewModel
+    @ObservedObject var viewModel: WeatherViewModel
     @StateObject var weather7DaysViewModel = Weather7DaysViewModel()
     @StateObject var locationManager = LocationManager()
     @State private var isLoading: Bool = false
@@ -33,8 +33,7 @@ struct WeatherView: View {
             
             ScrollView {
                 VStack {
-                    
-                    
+
                     HStack {
                         // Current location Button
                         Button {
