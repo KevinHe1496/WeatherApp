@@ -19,9 +19,8 @@ struct ErrorView: View {
     
     var body: some View {
         ZStack{
-            Image("")
-                .resizable()
-                .background(Color.red)
+            LinearGradient(colors: [Color(red: 22/255, green: 106/255, blue: 215/255), Color(red: 139/255, green: 133/255, blue: 254/255), Color(red: 94/255, green: 129/255, blue: 254/255)], startPoint: .bottom, endPoint: .top)
+                .ignoresSafeArea()
             VStack {
                 
                 // Imagen error
@@ -48,7 +47,7 @@ struct ErrorView: View {
                 } label: {
                     Text("Regresar")
                         .font(.headline)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(.blue)
                         .frame(width: 200, height: 50)
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
